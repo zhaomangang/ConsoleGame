@@ -242,19 +242,25 @@ int Gobang::play() {
 			}
 			
 		}else if(65==temp) {
-			movePos('u');
+			if(pos_x_now-1>=0)
+				movePos('u');
 		}else if(66==temp) {
-			movePos('d');
+			if(pos_x_now+1<15)
+				movePos('d');
 		}else if(68==temp) {
-			movePos('r');
+			if(pos_y_now-1>=0)
+				movePos('r');
 		}else if(67==temp) {
-			movePos('l');
-		}else {
-			//break;
+			if(pos_y_now+1<29)
+				movePos('l');
+		}else if(113==temp){
+			
+			break;
 
 		}
 	}
 	help();
+	cout<<"\033[20;0H";
 	return this->winer;
 
 }
@@ -270,6 +276,8 @@ void Gobang::help()	{
 		cout<<"\033[8;40H";
 		cout<<"落子："<<"光标移至对应位置后按 d ";
 		cout<<"\033[10;40H";
+		cout<<"退出："<<"键盘输入 q ";
+		cout<<"\033[12;40H";
 		cout<<"当前操作方：";
 		if(this->who_now) {
 			cout<<"黑方("<<this->piece_black<<")";
@@ -283,7 +291,7 @@ void Gobang::help()	{
 		cout<<"获胜方：";
 		if(this->winer==1) {
 			cout<<"黑方("<<this->piece_black<<")";
-		}else {
+		}else if(winer==2){
 			cout<<"白方("<<this->piece_white<<")";
 		}
 		cout<<"\033[16;0H";
